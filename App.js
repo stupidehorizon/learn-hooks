@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { Fragment, useState } from 'react';
 
 const App = () => {
-  return <h1>hello world</h1>;
+  const [count, setCount] = useState(0);
+  return (
+    <Fragment>
+      <h1>{count}</h1>
+      <button onClick={() => setCount(count + 1)} >+</button>
+      <button onClick={() => setCount(count - 1)} >-</button>
+    </Fragment>
+  );
 }
 
 export default App;
