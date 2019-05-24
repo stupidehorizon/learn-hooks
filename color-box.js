@@ -1,9 +1,8 @@
-import React, { useContext } from 'react';
-import ColorContext from './color-context';
+import React, { memo } from 'react';
 
-const ColorBox = () => {
-  const color = useContext(ColorContext);
-  return <div style={{width: 200, height: 200, backgroundColor: color}} ></div>
+const ColorBox = ({inc}) => {
+  console.log('color box render');
+  return <div style={{width: 200, height: 200, backgroundColor: 'red'}} ><button onClick={inc}>+</button></div>
 }
 
-export default ColorBox;
+export default memo(ColorBox);

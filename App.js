@@ -1,10 +1,8 @@
-import React, { Fragment, useState, useEffect, useMemo } from 'react';
+import React, { Fragment, useState, useEffect, useMemo, useCallback } from 'react';
 import ColorBox from './color-box';
-import ColorContext from './color-context';
 
 const App = () => {
   const [count, setCount] = useState(0);
-  const [divCount, setDivCount] = useState(1);
 
   useEffect(() => {
     document.title = count;
@@ -15,20 +13,21 @@ const App = () => {
     return count**count;
   }, [count]);
 
+  const inc = useCallback(() => setCount(count => count + 1), []);
+  const des = useCallback(() => setCount(count => count - 1), []);
+
 
   return (
     <Fragment>
       <h1>{count} ** {count} = {squareCount}</h1>
-      <button onClick={() => setCount(count + 1)} >+</button>
-      <button onClick={() => setCount(count - 1)} >-</button>
+      <button onClick={inc} >+</button>
+      <button onClick={des} >-</button>
       <br />
-      <button onClick={() => setDivCount(divCount + 1)} >+</button>
-      <button onClick={() => setDivCount(divCount - 1)} >-</button>
-      <ColorContext.Provider value={count %2 ? 'red' : 'blue'}>
-        {
-          Array.from({length: divCount}).map(() => <ColorBox />)
-        }
-      </ColorContext.Provider>
+      <ColorBox key="1" inc={inc} />
+      <ColorBox key="2" inc={inc} />
+      <ColorBox key="3" inc={inc} />
+      <ColorBox key="4" inc={inc} />
+      <ColorBox key="5" inc={inc} />
     </Fragment>
   );
 }
